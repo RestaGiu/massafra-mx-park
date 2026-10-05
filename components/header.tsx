@@ -4,12 +4,15 @@ import { Dialog } from "@base-ui/react/dialog";
 import { ListIcon, XIcon, ArrowUpRightIcon } from "@phosphor-icons/react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { site } from "@/content/site";
 import type { Locale } from "@/i18n/routing";
 import { copy } from "@/content/copy";
+import { withoutBasePath } from "@/lib/paths";
 
 export function LanguageSwitcher({ locale }: { locale: Locale }) {
   const pathname = usePathname();
+  const localPathname = withoutBasePath(pathname);
   function switchLanguage(
     event: React.MouseEvent<HTMLAnchorElement>,
     target: Locale,
@@ -33,7 +36,7 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
       .at(-1);
     const hash = section ? `#${section.id}` : window.location.hash;
     // next-intl stores the explicit /it or /en choice in NEXT_LOCALE on navigation.
-    const destination = pathname.replace(/^\/(it|en)/, `/${target}`) + hash;
+    const destination = event.currentTarget.pathname + hash;
     if (
       window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
       document.documentElement.dataset.motion === "paused"
@@ -63,16 +66,16 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
   return (
     <div className="languages" aria-label={copy[locale].nav.language}>
       {(["it", "en"] as const).map((lang) => (
-        <a
+        <Link
           key={lang}
-          href={pathname.replace(/^\/(it|en)/, `/${lang}`)}
+          href={localPathname.replace(/^\/(it|en)/, `/${lang}`)}
           hrefLang={lang}
           lang={lang}
           aria-current={locale === lang ? "page" : undefined}
           onClick={(e) => switchLanguage(e, lang)}
         >
           {lang.toUpperCase()}
-        </a>
+        </Link>
       ))}
     </div>
   );
@@ -101,7 +104,7 @@ export function Header({ locale }: { locale: Locale }) {
   return (
     <>
       <header className="site-header">
-        <a className="wordmark" href={`/${locale}`}>
+        <Link className="wordmark" href={`/${locale}`}>
           {!site.logo.startsWith("TODO_CLIENTE") ? (
             <Image
               src={site.logo}
@@ -120,7 +123,7 @@ export function Header({ locale }: { locale: Locale }) {
               </span>
             </>
           )}
-        </a>
+        </Link>
         <nav
           className="desktop-nav"
           aria-label={
@@ -128,17 +131,17 @@ export function Header({ locale }: { locale: Locale }) {
           }
         >
           {links.map(([id, label]) => (
-            <a href={`/${locale}#${id}`} key={id}>
+            <Link href={`/${locale}#${id}`} key={id}>
               {label}
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="nav-actions">
           <LanguageSwitcher locale={locale} />
-          <a href={`/${locale}#prenota`} className="button small nav-book">
+          <Link href={`/${locale}#prenota`} className="button small nav-book">
             {t.nav.book}
             <ArrowUpRightIcon size={18} />
-          </a>
+          </Link>
           <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger
               className="menu-trigger icon-button"
@@ -161,7 +164,7 @@ export function Header({ locale }: { locale: Locale }) {
                 </Dialog.Close>
                 <nav>
                   {[...links, ["prenota", t.nav.book]].map(([id, label], i) => (
-                    <a
+                    <Link
                       style={{ animationDelay: `${i * 50}ms` }}
                       key={id}
                       href={`/${locale}#${id}`}
@@ -169,7 +172,7 @@ export function Header({ locale }: { locale: Locale }) {
                     >
                       {label}
                       <ArrowUpRightIcon size={28} />
-                    </a>
+                    </Link>
                   ))}
                 </nav>
                 <span className="mono">GINOSA (TA), PUGLIA</span>

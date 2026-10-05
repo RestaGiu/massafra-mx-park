@@ -62,7 +62,11 @@ As políticas são modelos IT/EN com pendências explícitas, sempre noindex at�
 
 Para medir SEO localmente sem publicar, use `NEXT_PUBLIC_SITE_URL=http://localhost:3000 npm run build`; isso apenas habilita as diretivas de indexação no build local de teste. Sem a variável, um novo build restaura o noindex de prévia.
 
-Deploy alvo: importe o repositório na Vercel, escolha Next.js, configure `NEXT_PUBLIC_SITE_URL`, rode `npm run build` e publique após validar as pendências. O projeto usa proxy para negociação de idioma e otimização de imagens, portanto não é um export estático pronto; um host somente estático exigiria adaptar esses recursos.
+### Publicação atual no Cloudflare Pages
+
+O site está preparado para a subpasta `https://restagiu.com/massaframxpark`. Rode `npm run build:cloudflare` para gerar `out/` com exportação estática, `basePath`, canonical, hreflang, sitemap, manifest e assets apontando para essa subpasta. O script também cria a entrada `/massaframxpark/`, que encaminha para o italiano em `/massaframxpark/it/`.
+
+O domínio principal é publicado pelo repositório `RestaGiu/portfolio` no Cloudflare Pages. Para atualizar a versão ao vivo, copie o conteúdo de `out/` para `public/massaframxpark/` nesse repositório, valide o build do portfólio e envie o branch `main`; a integração do Cloudflare fará o deploy automático.
 
 ## Verificar
 

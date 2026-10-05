@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --hostname 0.0.0.0",
     "build": "next build",
+    "build:cloudflare": "NEXT_PUBLIC_BASE_PATH=/massaframxpark NEXT_PUBLIC_SITE_URL=https://restagiu.com/massaframxpark next build && node scripts/prepare-cloudflare-export.mjs",
     "start": "next start --hostname 0.0.0.0",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",

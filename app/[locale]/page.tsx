@@ -1,4 +1,5 @@
 import { hasLocale } from "next-intl";
+import Link from "next/link";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import {
@@ -495,8 +496,8 @@ export default async function Home({
               <small>{t.footer.legal}</small>
             </div>
             <div>
-              <a href={`/${locale}/privacy`}>{t.footer.privacy}</a>
-              <a href={`/${locale}/cookies`}>{t.footer.cookies}</a>
+              <Link href={`/${locale}/privacy`}>{t.footer.privacy}</Link>
+              <Link href={`/${locale}/cookies`}>{t.footer.cookies}</Link>
             </div>
           </div>
           <p className="imagery-notice">{site.imageryNotice[locale]}</p>

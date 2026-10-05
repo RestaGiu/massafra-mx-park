@@ -1,3 +1,5 @@
+import { withBasePath } from "@/lib/paths";
+
 export type Localized = { it: string; en: string };
 export type Media = {
   src: string;
@@ -23,7 +25,7 @@ const visual = (
   caption: Localized,
   position = "50% 50%",
 ): Media => ({
-  src: `/media/${key}-ai.webp`,
+  src: withBasePath(`/media/${key}-ai.webp`),
   type: "image",
   generated: true,
   position,

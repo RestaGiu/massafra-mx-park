@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
@@ -38,9 +39,9 @@ export default async function Policy({
   const privacy = policy === "privacy";
   return (
     <main className="container legal-page" id="main">
-      <a className="back-link" href={`/${locale}`}>
+      <Link className="back-link" href={`/${locale}`}>
         ← Massafra MX Park
-      </a>
+      </Link>
       <h1>{privacy ? "PRIVACY POLICY" : "COOKIE POLICY"}</h1>
       <p className="legal-draft">
         {it

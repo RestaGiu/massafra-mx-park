@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
 import {
   ArrowUpRightIcon,
   WhatsappLogoIcon,
@@ -172,7 +173,7 @@ export function BookingForm({ locale }: { locale: Locale }) {
         <ArrowUpRightIcon size={16} />
       </button>
       <p className="form-privacy">
-        {t.privacy} <a href={`/${locale}/privacy`}>{t.policy}</a>.
+        {t.privacy} <Link href={`/${locale}/privacy`}>{t.policy}</Link>.
       </p>
       <noscript>
         <p>

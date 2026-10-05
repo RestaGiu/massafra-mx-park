@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
 import { origin } from "@/lib/seo";
+
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return ["it", "en"].map((locale) => ({
     url: `${origin}/${locale}`,
